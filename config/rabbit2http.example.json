@@ -1,0 +1,19 @@
+{
+    "listen_queue": "gotelltherabbit",
+    "bind_exchanges" : [
+        {
+            "exchange_name" : "rabbit2http_exchange1",
+            "http_url" : "https://github.com/sirnarsh/telltherabbit/" ,
+            "http_headers": [
+                "Authentication: Basic base64token-"
+            ]
+        },
+        {
+            "exchange_name" : "rabbit2http_exchange2",
+            "http_url" : "https://github.com/sirnarsh/telltherabbit/" ,
+            "http_headers": [
+                "Authentication: Basic base64token-"
+            ]
+        }   
+    ]
+}
