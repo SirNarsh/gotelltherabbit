@@ -10,7 +10,7 @@ import (
 func main() {
 	log.Println("Starting...")
 	readconf.CheckAllRequiredFiles()
-	var conf = readconf.GetGeneral()
+	conf := readconf.GetGeneral()
 
 	if conf.EnableRabbit2HTTP {
 		log.Println("Starting RabbitMQ Listener")

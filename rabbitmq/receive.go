@@ -23,36 +23,34 @@ func Receive() {
 	defer ch.Close()
 
 	// Declare our listener queue
-	{
-		_, err := ch.QueueDeclare(
-			r2hConf.ListenQueue, // name
-			true,                // durable
-			false,               // delete when unused
-			false,               // exclusive
-			false,               // no-wait
-			nil,                 // arguments
-		)
-		failOnError(err, "Failed to declare a queue")
-	}
+
+	_, err = ch.QueueDeclare(
+		r2hConf.ListenQueue, // name
+		true,                // durable
+		false,               // delete when unused
+		false,               // exclusive
+		false,               // no-wait
+		nil,                 // arguments
+	)
+	failOnError(err, "Failed to declare a queue")
 
 	// Bind the queue we are consuming with all exchanges we want to listen to.
 	for _, exchange := range r2hConf.BindExchanges {
-		{
-			err := ch.ExchangeDeclare(exchange.ExchangeName, "fanout", true, false, false, false, nil)
-			failOnError(err, fmt.Sprintf("Failed to bind Exchange '%s' to Queue '%s'", r2hConf.ListenQueue, exchange.ExchangeName))
-			log.Printf("Declared or found exchange %s", exchange.ExchangeName)
-		}
-		{
-			err := ch.QueueBind(
-				r2hConf.ListenQueue,
-				"",
-				exchange.ExchangeName,
-				false,
-				nil,
-			)
-			failOnError(err, fmt.Sprintf("Failed to bind Exchange '%s' to Queue '%s'", r2hConf.ListenQueue, exchange.ExchangeName))
-			log.Printf("Bind Exchange '%s' to listener queue '%s'", exchange.ExchangeName, r2hConf.ListenQueue)
-		}
+
+		err = ch.ExchangeDeclare(exchange.ExchangeName, "fanout", true, false, false, false, nil)
+		failOnError(err, fmt.Sprintf("Failed to bind Exchange '%s' to Queue '%s'", r2hConf.ListenQueue, exchange.ExchangeName))
+		log.Printf("Declared or found exchange %s", exchange.ExchangeName)
+
+		err = ch.QueueBind(
+			r2hConf.ListenQueue,
+			"",
+			exchange.ExchangeName,
+			false,
+			nil,
+		)
+		failOnError(err, fmt.Sprintf("Failed to bind Exchange '%s' to Queue '%s'", r2hConf.ListenQueue, exchange.ExchangeName))
+		log.Printf("Bind Exchange '%s' to listener queue '%s'", exchange.ExchangeName, r2hConf.ListenQueue)
+
 	}
 
 	msgs, err := ch.Consume(

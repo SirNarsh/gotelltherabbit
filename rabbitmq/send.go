@@ -14,7 +14,7 @@ If exchange is not declared yet this will also declare the exchange
 */
 func Send(exchangeName string, body []byte) {
 
-	var conf = readconf.GetGeneral()
+	conf := readconf.GetGeneral()
 
 	conn, err := amqp.Dial(conf.RabbitMQServer)
 	failOnError(err, "Failed to connect to RabbitMQ")
