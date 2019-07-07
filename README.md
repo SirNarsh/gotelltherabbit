@@ -7,7 +7,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Go tell the rabbit (RabbitMQ) is a minimalist HTTP to RabbitMQ & RabbitMQ to HTTP bridge/middleware
+Go tell the rabbit (RabbitMQ) is a minimalist HTTP to RabbitMQ & RabbitMQ to HTTP bridge/middleware written in golang
 
 - No Auth
 - No message manipulation, checking, verification
