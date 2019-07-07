@@ -1,6 +1,7 @@
 package rabbitmq
 
 import (
+	"encoding/base64"
 	"fmt"
 	"log"
 
@@ -37,8 +38,8 @@ func Send(exchangeName string, body []byte) {
 		false,        // mandatory
 		false,        // immediate
 		amqp.Publishing{
-			ContentType: "text/plain",
-			Body:        body,
+			ContentEncoding: "base64",
+			Body:            []byte(base64.StdEncoding.EncodeToString(body)),
 		})
 	log.Printf(" [x] Sent msg to exchange %s", exchangeName)
 	failOnError(err, "Failed to publish a message")
