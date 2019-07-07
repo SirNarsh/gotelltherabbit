@@ -1,3 +1,4 @@
+config/general.json
 config/http2rabbit.json
 config/rabbit2http.json
 gotelltherabbit

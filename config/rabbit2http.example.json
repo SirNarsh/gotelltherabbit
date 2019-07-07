@@ -1,17 +1,17 @@
 {
-    "listen_queue": "gotelltherabbit",
-    "bind_exchanges" : [
+    "ListenQueue": "gotelltherabbit",
+    "BindExchanges" : [
         {
-            "exchange_name" : "rabbit2http_exchange1",
-            "http_url" : "https://github.com/sirnarsh/telltherabbit/" ,
-            "http_headers": [
+            "ExchangeName" : "rabbit2http_exchange1",
+            "HttpURL" : "https://github.com/sirnarsh/telltherabbit/" ,
+            "HttpHeaders": [
                 "Authentication: Basic base64token-"
             ]
         },
         {
-            "exchange_name" : "rabbit2http_exchange2",
-            "http_url" : "https://github.com/sirnarsh/telltherabbit/" ,
-            "http_headers": [
+            "ExchangeName" : "rabbit2http_exchange2",
+            "HttpURL" : "https://github.com/sirnarsh/telltherabbit/" ,
+            "HttpHeaders": [
                 "Authentication: Basic base64token-"
             ]
         }   
