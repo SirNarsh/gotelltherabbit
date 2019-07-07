@@ -1,5 +1,6 @@
 {
     "RabbitMQServer": "amqp://guest:guest@localhost:5672/",
     "EnableRabbit2HTTP": true,
-    "EnableHTTP2Rabbit": true
+    "EnableHTTP2Rabbit": true,
+    "ServerBind": ":8080"
 }
