@@ -16,13 +16,14 @@ Go tell the rabbit (RabbitMQ) is a minimalist HTTP to RabbitMQ & RabbitMQ to HTT
 
 ## Planned features
 
-### A. HTTP to RabbitMQ
-* Listen to :80 forward requests /exchange/{exchange_name} to RabbitMQ {exchange_name}
-* Config will contain either whitelist of allowed exchange_names or "*" to allow sending to all exchanges
+### A. HTTP to RabbitMQ  (Configurable in config/http2rabbit.json)
+* Listen to :8080 forward requests with pattern /exchange/{exchange_name} to RabbitMQ {exchange_name}
+* Ether whitelist exchanges user is allowed to post to or add "*" to allow sending to all exchanges
 
 (No auth or https handling please use nginx proxy for if needed.)
-### B. RabbitMQ to HHTP
-* Bind all exchange in config to gotelltherabbit queue
+
+### B. RabbitMQ to HTTP (Configurable in config/rabbit2http.json)
+* Bind all exchange in config to 'gotelltherabbit' queue
 * Whenever a message is sent to any of defined exchanges in config, GTTR will forwarded to respective HTTP URL from config along with defined custom headers (eg: 'Auth: Bearer xyz')
 
 ## Example usecase
