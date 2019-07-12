@@ -10,8 +10,8 @@
 Go tell the rabbit (RabbitMQ) is a minimalist HTTP to RabbitMQ & RabbitMQ to HTTP bridge/middleware written in golang
 
 - No Auth
-- No message manipulation, checking, verification
-- Limited to synchronis actions only: HTTP 200 means message is delivered to RabbitMQ, ACK messages in RabbitMQ means HTTP was forwarded and resulted in 200.
+- No message manipulation, checking, validation
+- Limited to synchronous actions only: HTTP 200 means message is delivered to RabbitMQ, ACK messages in RabbitMQ means HTTP was forwarded and resulted in 200.
 
 
 ## Planned features
