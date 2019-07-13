@@ -3,16 +3,22 @@
     "BindExchanges" : [
         {
             "ExchangeName" : "rabbit2http_exchange1",
-            "HttpURL" : "https://github.com/sirnarsh/telltherabbit/" ,
-            "HttpHeaders": [
-                "Authentication: Basic base64token-"
+            "HTTPURL" : "https://github.com/sirnarsh/telltherabbit/" ,
+            "HTTPHeaders": [
+                {
+                    "Key": "Authentication",
+                    "Value": "Basic base64token-"
+                }
             ]
         },
         {
             "ExchangeName" : "rabbit2http_exchange2",
-            "HttpURL" : "https://github.com/sirnarsh/telltherabbit/" ,
-            "HttpHeaders": [
-                "Authentication: Basic base64token-"
+            "HTTPURL" : "https://github.com/sirnarsh/telltherabbit/" ,
+            "HTTPHeaders": [
+                {
+                    "Key": "Authentication",
+                    "Value": "Basic base64token-"
+                }
             ]
         }   
     ]

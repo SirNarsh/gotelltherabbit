@@ -3,6 +3,7 @@ package rabbitmq
 import (
 	"fmt"
 	"log"
+	"net/http"
 
 	"github.com/sirnarsh/gotelltherabbit/readconf"
 	"github.com/streadway/amqp"
@@ -68,10 +69,31 @@ func Receive() {
 
 	go func() {
 		for d := range msgs {
-			log.Printf("Received a message: %s, from exchange %s with routing %s", d.Body, d.Exchange, d.RoutingKey)
-			// @todo ACK Should be send after we send the HTTP request and get code 200
-			// For now we ACK message after consuming directly
-			d.Ack(false)
+			log.Printf("Received a message %s from exchange %s with routing %s", d.MessageId, d.Exchange, d.RoutingKey)
+
+			for _, exchange := range r2hConf.BindExchanges {
+				if exchange.ExchangeName == d.Exchange {
+					log.Printf("Found config for exchange %s for message %s, will send to %s", d.Exchange, d.MessageId, exchange.HTTPURL)
+					client := &http.Client{}
+					req, err := http.NewRequest("POST", exchange.HTTPURL, nil)
+					if err != nil {
+						log.Printf("Couldn't create request, will requeue message for later")
+						continue
+					}
+					for _, header := range exchange.HTTPHeaders {
+						req.Header.Add(header.Key, header.Value)
+					}
+					resp, err := client.Do(req)
+					if resp.StatusCode == 200 {
+						d.Ack(false)
+						log.Printf("Received HTTP 200, Sent ACK for message %s", d.MessageId)
+					} else {
+						log.Printf("Received HTTP %i, ACK was not sent for message %s", resp.StatusCode, d.MessageId)
+					}
+
+				}
+			}
+
 		}
 	}()
 
