@@ -1,9 +1,6 @@
 
 # GTTR; GO TELL THE RABBIT
 
-
-## <u>Work in progress, not ready for usage</u>
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
