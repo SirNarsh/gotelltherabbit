@@ -1,8 +1,8 @@
 FROM golang:1.17 as builder
 
 ENV GOPATH="/goroot/"
-WORKDIR /goroot/src/github.com/sirnarsh/gowebhooks/
-COPY . /goroot/src/github.com/sirnarsh/gowebhooks/
+WORKDIR /goroot/src/github.com/sirnarsh/gotelltherabbit/
+COPY . /goroot/src/github.com/sirnarsh/gotelltherabbit/
 RUN ls
 RUN go get
 RUN CGO_ENABLED=0 go build
@@ -13,7 +13,7 @@ RUN apk --no-cache add ca-certificates mailcap && addgroup -S app && adduser -S 
 USER app
 WORKDIR /app
 COPY --from=builder /goroot/src/github.com/sirnarsh/gotelltherabbit/gotelltherabbit /app/gotelltherabbit
-VOLUME /app/hooks
-VOLUME /app/files
+VOLUME /app/config/
+
 EXPOSE 80
-ENTRYPOINT ["./gowebhooks"]
+ENTRYPOINT ["./gotelltherabbit"]
