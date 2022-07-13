@@ -16,4 +16,5 @@ COPY --from=builder /goroot/src/github.com/sirnarsh/gotelltherabbit/gotelltherab
 VOLUME /app/config/
 
 EXPOSE 80
+EXPOSE 8080
 ENTRYPOINT ["./gotelltherabbit"]
